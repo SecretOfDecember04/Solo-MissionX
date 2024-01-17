@@ -50,6 +50,8 @@ class GameScene: SKScene {
         player.zPosition = 2
         self.addChild(player)
         
+        startNewLevel()
+        
     }
     
     
@@ -98,9 +100,21 @@ class GameScene: SKScene {
     }
     
     
+    func startNewLevel(){
+        
+        let spawn = SKAction.run(spawnEnemy)
+        let waitToSpawn = SKAction.wait(forDuration: 1)
+        let spawnSequence = SKAction.sequence([spawn, waitToSpawn])
+        let spawnForever = SKAction.repeatForever(spawnSequence)
+        self.run(spawnForever)
+        
+        
+    }
+    
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         fireB()
-        spawnEnemy()
+        
     }
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?){
         for touch: AnyObject in touches{
