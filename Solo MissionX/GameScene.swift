@@ -12,8 +12,29 @@ class GameScene: SKScene {
     
     let player = SKSpriteNode (imageNamed: "playerShip")
     
-    
     let bulletSound = SKAction.playSoundFileNamed("gamesound", waitForCompletion: false)
+    
+    func random() -> CGFloat{
+        return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
+    }
+    func random(min min: CGFloat, max: CGFloat) -> CGFloat{
+        return random() * (max - min) + min
+    }
+    
+    var gameArea: CGRect
+    
+    override init(size: CGSize){
+        let maxAspectRatio: CGFloat = 16.0/9.0
+        let playableWidth = size.height / maxAspectRatio
+        let margin = (size.width - playableWidth) / 2
+        gameArea = CGRect(x: margin, y: 0, width: playableWidth, height: size.height)
+        super.init(size: size)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder){
+        fatalError("init(coder: ) has not been implemented")
+    }
     
     override func didMove(to view: SKView) {
         
@@ -24,7 +45,7 @@ class GameScene: SKScene {
         self.addChild(background)
         
         
-        player.setScale(2)
+        player.setScale(1)
         player.position = CGPoint(x: self.size.width/2, y: self.size.height * 0.2)
         player.zPosition = 2
         self.addChild(player)
@@ -35,7 +56,7 @@ class GameScene: SKScene {
     func fireB() {
         
         let bullet = SKSpriteNode(imageNamed: "bullet")
-        bullet.setScale(2)
+        bullet.setScale(1)
         bullet.position = player.position
         bullet.zPosition = 1
         self.addChild(bullet)
@@ -49,9 +70,37 @@ class GameScene: SKScene {
         
     }
     
+    func spawnEnemy() {
+        
+        let randomXStart = random(min: CGRectGetMinX(gameArea), max: CGRectGetMaxX(gameArea))
+        let randomXEnd = random(min: CGRectGetMinX(gameArea), max: CGRectGetMaxX(gameArea))
+        
+        let startPoint = CGPoint(x: randomXStart, y: self.size.height * 1.2)
+        let endPoint = CGPoint(x: randomXEnd, y: -self.size.height * 0.2)
+        
+        let enemy = SKSpriteNode(imageNamed: "enemyShip")
+        enemy.setScale(1)
+        enemy.position = startPoint
+        enemy.zPosition = 2
+        self.addChild(enemy)
+
+        let moveEnemy = SKAction.move(to: endPoint, duration: 1.5)
+        let deleteEnemy = SKAction.removeFromParent()
+        let enemySequence = SKAction.sequence([moveEnemy, deleteEnemy])
+        enemy.run(enemySequence)
+        
+        let dx = endPoint.x - startPoint.x
+        let dy = endPoint.y - startPoint.y
+        let amountToRotate = atan2(dy, dx)
+        enemy.zRotation = amountToRotate
+        
+        
+    }
+    
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         fireB()
-        
+        spawnEnemy()
     }
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?){
         for touch: AnyObject in touches{
@@ -60,7 +109,18 @@ class GameScene: SKScene {
             let prevPointOfTouch = touch.previousLocation(in: self)
             
             let amount = pointOfTouch.x - prevPointOfTouch.x
+            
             player .position.x += amount
+            
+            if player.position.x > CGRectGetMaxX(gameArea) - player.size.width/2{
+                player.position.x = CGRectGetMaxX(gameArea) - player.size.width/2
+            }
+            
+            if player.position.x < CGRectGetMinX(gameArea) + player.size.width/2{
+                player.position.x = CGRectGetMinX(gameArea) + player.size.width/2
+            }
+            
+            
             
         }
     }
