@@ -60,6 +60,7 @@ class GameScene: SKScene {
             let prevPointOfTouch = touch.previousLocation(in: self)
             
             let amount = pointOfTouch.x - prevPointOfTouch.x
+            player .position.x += amount
             
         }
     }
