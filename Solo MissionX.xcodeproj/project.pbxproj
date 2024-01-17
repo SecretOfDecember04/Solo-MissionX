@@ -18,6 +18,7 @@
 		F23DB0E82B57419D0031A5B2 /* Solo_MissionXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23DB0E72B57419D0031A5B2 /* Solo_MissionXTests.swift */; };
 		F23DB0F22B57419D0031A5B2 /* Solo_MissionXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23DB0F12B57419D0031A5B2 /* Solo_MissionXUITests.swift */; };
 		F23DB0F42B57419D0031A5B2 /* Solo_MissionXUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23DB0F32B57419D0031A5B2 /* Solo_MissionXUITestsLaunchTests.swift */; };
+		F23DB1032B5756050031A5B2 /* gamesound.wav in Resources */ = {isa = PBXBuildFile; fileRef = F23DB1022B5756050031A5B2 /* gamesound.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		F23DB0ED2B57419D0031A5B2 /* Solo MissionXUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Solo MissionXUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F23DB0F12B57419D0031A5B2 /* Solo_MissionXUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solo_MissionXUITests.swift; sourceTree = "<group>"; };
 		F23DB0F32B57419D0031A5B2 /* Solo_MissionXUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solo_MissionXUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F23DB1022B5756050031A5B2 /* gamesound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gamesound.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				F23DB0D12B5741900031A5B2 /* Actions.sks */,
 				F23DB0D32B5741900031A5B2 /* GameScene.swift */,
 				F23DB0D52B5741900031A5B2 /* GameViewController.swift */,
+				F23DB1022B5756050031A5B2 /* gamesound.wav */,
 				F23DB0D72B5741900031A5B2 /* Main.storyboard */,
 				F23DB0DA2B57419D0031A5B2 /* Assets.xcassets */,
 				F23DB0DC2B57419D0031A5B2 /* LaunchScreen.storyboard */,
@@ -237,6 +240,7 @@
 			files = (
 				F23DB0D92B5741900031A5B2 /* Main.storyboard in Resources */,
 				F23DB0D02B5741900031A5B2 /* GameScene.sks in Resources */,
+				F23DB1032B5756050031A5B2 /* gamesound.wav in Resources */,
 				F23DB0DB2B57419D0031A5B2 /* Assets.xcassets in Resources */,
 				F23DB0DE2B57419D0031A5B2 /* LaunchScreen.storyboard in Resources */,
 				F23DB0D22B5741900031A5B2 /* Actions.sks in Resources */,
