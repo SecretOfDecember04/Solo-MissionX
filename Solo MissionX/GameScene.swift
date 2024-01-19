@@ -61,6 +61,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.physicsBody = SKPhysicsBody(rectangleOf: player.size)
         player.physicsBody!.affectedByGravity = false
         player.physicsBody!.categoryBitMask = PhysicsCategories.Player
+        player.physicsBody!.collisionBitMask = PhysicsCategories.None
+        player.physicsBody!.contactTestBitMask = PhysicsCategories.Enemy
         self.addChild(player)
         
         startNewLevel()
@@ -77,6 +79,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bullet.physicsBody = SKPhysicsBody(rectangleOf: bullet.size)
         bullet.physicsBody!.affectedByGravity = false
         bullet.physicsBody!.categoryBitMask = PhysicsCategories.Bullet
+        bullet.physicsBody!.collisionBitMask = PhysicsCategories.None
+        bullet.physicsBody!.contactTestBitMask = PhysicsCategories.Enemy
         self.addChild(bullet)
         
         let removeBullet = SKAction.moveTo(y: self.size.height + bullet.size.height, duration: 1)
@@ -103,6 +107,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.physicsBody = SKPhysicsBody(rectangleOf: enemy.size)
         enemy.physicsBody!.affectedByGravity = false
         enemy.physicsBody!.categoryBitMask = PhysicsCategories.Enemy
+        enemy.physicsBody!.collisionBitMask = PhysicsCategories.None
+        enemy.physicsBody!.contactTestBitMask = PhysicsCategories.Player | PhysicsCategories.Bullet
         self.addChild(enemy)
 
         let moveEnemy = SKAction.move(to: endPoint, duration: 1.5)
@@ -114,6 +120,41 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let dy = endPoint.y - startPoint.y
         let amountToRotate = atan2(dy, dx)
         enemy.zRotation = amountToRotate
+        
+        
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact){
+        var body1 = SKPhysicsBody()
+        var body2 = SKPhysicsBody()
+        
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask{
+            body1 = contact.bodyA
+            body2 = contact.bodyB
+        }
+        else{
+            body1 = contact.bodyB
+            body2 = contact.bodyA
+        }
+        
+        if body1.categoryBitMask == PhysicsCategories.Player && body2.categoryBitMask == PhysicsCategories.Enemy{
+            //if the player has hit the enemy
+            body1.node?.removeFromParent()
+            body2.node?.removeFromParent()
+            
+            
+        }
+        
+        if body1.categoryBitMask == PhysicsCategories.Bullet && body2.categoryBitMask == PhysicsCategories.Enemy{
+            //if the bullet has hit the enemy
+            body1.node?.removeFromParent()
+            body2.node?.removeFromParent()
+            
+            
+        }
+        
+        
+        
         
         
     }
