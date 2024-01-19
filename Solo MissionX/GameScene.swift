@@ -15,6 +15,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let bulletSound = SKAction.playSoundFileNamed("gamesound", waitForCompletion: false)
     
+    struct PhysicsCategories{
+        static let None : UInt32 = 0
+        static let Player : UInt32 = 0b1 //1
+        static let Bullet : UInt32 = 0b10 //2
+        static let Enemy : UInt32 = 0b100 //4
+    }
+    
+    
     func random() -> CGFloat{
         return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
     }
@@ -52,6 +60,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.zPosition = 2
         player.physicsBody = SKPhysicsBody(rectangleOf: player.size)
         player.physicsBody!.affectedByGravity = false
+        player.physicsBody!.categoryBitMask = PhysicsCategories.Player
         self.addChild(player)
         
         startNewLevel()
@@ -67,6 +76,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bullet.zPosition = 1
         bullet.physicsBody = SKPhysicsBody(rectangleOf: bullet.size)
         bullet.physicsBody!.affectedByGravity = false
+        bullet.physicsBody!.categoryBitMask = PhysicsCategories.Bullet
         self.addChild(bullet)
         
         let removeBullet = SKAction.moveTo(y: self.size.height + bullet.size.height, duration: 1)
@@ -92,6 +102,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.zPosition = 2
         enemy.physicsBody = SKPhysicsBody(rectangleOf: enemy.size)
         enemy.physicsBody!.affectedByGravity = false
+        enemy.physicsBody!.categoryBitMask = PhysicsCategories.Enemy
         self.addChild(enemy)
 
         let moveEnemy = SKAction.move(to: endPoint, duration: 1.5)
