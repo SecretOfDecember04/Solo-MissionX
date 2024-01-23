@@ -139,6 +139,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if body1.categoryBitMask == PhysicsCategories.Player && body2.categoryBitMask == PhysicsCategories.Enemy{
             //if the player has hit the enemy
+            
+            
+            if body1.node != nil{
+                spawnExplosion(spawnPosition: body1.node!.position)
+            }
+            
+            if body2.node != nil{
+                spawnExplosion(spawnPosition: body2.node!.position)
+            }
+            
+            
             body1.node?.removeFromParent()
             body2.node?.removeFromParent()
             
@@ -146,16 +157,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if body1.categoryBitMask == PhysicsCategories.Bullet && body2.categoryBitMask == PhysicsCategories.Enemy{
-            //if the bullet has hit the enemy
+            if body2.node != nil{
+                if body2.node!.position.y > self.size.height{
+                    return
+                }
+                else{
+                    spawnExplosion(spawnPosition: body2.node!.position)
+                }
+            }
             body1.node?.removeFromParent()
             body2.node?.removeFromParent()
-            
-            
         }
         
         
         
         
+        
+        
+    }
+    
+    func spawnExplosion(spawnPosition: CGPoint){
+        let explosion = SKSpriteNode(imageNamed: "explosion")
+        explosion.position = spawnPosition
+        explosion.zPosition = 3
+        self.addChild(explosion)
         
     }
     
