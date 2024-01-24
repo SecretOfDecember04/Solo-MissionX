@@ -19,6 +19,8 @@
 		F23DB0F22B57419D0031A5B2 /* Solo_MissionXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23DB0F12B57419D0031A5B2 /* Solo_MissionXUITests.swift */; };
 		F23DB0F42B57419D0031A5B2 /* Solo_MissionXUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23DB0F32B57419D0031A5B2 /* Solo_MissionXUITestsLaunchTests.swift */; };
 		F23DB1032B5756050031A5B2 /* gamesound.wav in Resources */ = {isa = PBXBuildFile; fileRef = F23DB1022B5756050031A5B2 /* gamesound.wav */; };
+		F2B3366C2B5F84EA0008A174 /* explosionSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = F2B3366B2B5F84EA0008A174 /* explosionSound.wav */; };
+		F2B336782B60123D0008A174 /* theBoldFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2B336772B60123D0008A174 /* theBoldFont.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,9 @@
 		F23DB0F12B57419D0031A5B2 /* Solo_MissionXUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solo_MissionXUITests.swift; sourceTree = "<group>"; };
 		F23DB0F32B57419D0031A5B2 /* Solo_MissionXUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solo_MissionXUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F23DB1022B5756050031A5B2 /* gamesound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gamesound.wav; sourceTree = "<group>"; };
+		F2B3366B2B5F84EA0008A174 /* explosionSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosionSound.wav; sourceTree = "<group>"; };
+		F2B336762B6011430008A174 /* Solo-MissionX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Solo-MissionX-Info.plist"; sourceTree = SOURCE_ROOT; };
+		F2B336772B60123D0008A174 /* theBoldFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = theBoldFont.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,11 +109,14 @@
 		F23DB0CC2B5741900031A5B2 /* Solo MissionX */ = {
 			isa = PBXGroup;
 			children = (
+				F2B336762B6011430008A174 /* Solo-MissionX-Info.plist */,
 				F23DB0CD2B5741900031A5B2 /* AppDelegate.swift */,
 				F23DB0CF2B5741900031A5B2 /* GameScene.sks */,
 				F23DB0D12B5741900031A5B2 /* Actions.sks */,
 				F23DB0D32B5741900031A5B2 /* GameScene.swift */,
+				F2B3366B2B5F84EA0008A174 /* explosionSound.wav */,
 				F23DB0D52B5741900031A5B2 /* GameViewController.swift */,
+				F2B336772B60123D0008A174 /* theBoldFont.ttf */,
 				F23DB1022B5756050031A5B2 /* gamesound.wav */,
 				F23DB0D72B5741900031A5B2 /* Main.storyboard */,
 				F23DB0DA2B57419D0031A5B2 /* Assets.xcassets */,
@@ -238,9 +246,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2B3366C2B5F84EA0008A174 /* explosionSound.wav in Resources */,
 				F23DB0D92B5741900031A5B2 /* Main.storyboard in Resources */,
 				F23DB0D02B5741900031A5B2 /* GameScene.sks in Resources */,
 				F23DB1032B5756050031A5B2 /* gamesound.wav in Resources */,
+				F2B336782B60123D0008A174 /* theBoldFont.ttf in Resources */,
 				F23DB0DB2B57419D0031A5B2 /* Assets.xcassets in Resources */,
 				F23DB0DE2B57419D0031A5B2 /* LaunchScreen.storyboard in Resources */,
 				F23DB0D22B5741900031A5B2 /* Actions.sks in Resources */,
@@ -449,6 +459,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8P22B4C3VF;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Solo-MissionX-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -478,6 +491,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8P22B4C3VF;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Solo-MissionX-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

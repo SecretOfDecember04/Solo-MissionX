@@ -11,9 +11,16 @@ import GameplayKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
+    var gameScore = 0
+    let scoreLabel = SKLabelNode(fontNamed: "The Bold Font")
+    
+    
+    
+    
     let player = SKSpriteNode (imageNamed: "playerShip")
     
     let bulletSound = SKAction.playSoundFileNamed("gamesound", waitForCompletion: false)
+    let explosionSound = SKAction.playSoundFileNamed("explosionSound", waitForCompletion: false)
     
     struct PhysicsCategories{
         static let None : UInt32 = 0
@@ -65,10 +72,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.physicsBody!.contactTestBitMask = PhysicsCategories.Enemy
         self.addChild(player)
         
+        scoreLabel.text = "Score: 0"
+        scoreLabel.fontSize = 70
+        scoreLabel.fontColor = SKColor.white
+        scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        scoreLabel.position = CGPoint(x: self.size.width*0.15, y: self.size.height*0.9)
+        scoreLabel.zPosition = 100
+        self.addChild(scoreLabel)
+        
+        
+        
         startNewLevel()
         
     }
     
+    
+    
+    func addScore(){
+        gameScore += 1
+        scoreLabel.text = "Score: \(gameScore)"
+    }
     
     func fireB() {
         
@@ -165,6 +188,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     spawnExplosion(spawnPosition: body2.node!.position)
                 }
             }
+            addScore()
             body1.node?.removeFromParent()
             body2.node?.removeFromParent()
         }
@@ -180,8 +204,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let explosion = SKSpriteNode(imageNamed: "explosion")
         explosion.position = spawnPosition
         explosion.zPosition = 3
+        explosion.setScale(0)
         self.addChild(explosion)
         
+        let scaleIn = SKAction.scale(to: 1, duration: 0.1)
+        let fadeOut = SKAction.fadeOut(withDuration: 0.1)
+        let delete = SKAction.removeFromParent()
+        
+        let explosionSequence = SKAction.sequence([explosionSound, scaleIn, fadeOut, delete])
+        explosion.run(explosionSequence)
     }
     
     
