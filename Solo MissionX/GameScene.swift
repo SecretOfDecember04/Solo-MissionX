@@ -14,7 +14,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameScore = 0
     let scoreLabel = SKLabelNode(fontNamed: "The Bold Font")
     
-    
+    var levelNumber = 0
     
     
     let player = SKSpriteNode (imageNamed: "playerShip")
@@ -91,6 +91,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func addScore(){
         gameScore += 1
         scoreLabel.text = "Score: \(gameScore)"
+        
+        if gameScore == 10 || gameScore == 25 || gameScore == 50 {
+            startNewLevel()
+        }
+        
     }
     
     func fireB() {
@@ -217,12 +222,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func startNewLevel(){
+        levelNumber += 1
+        
+        if self.action(forKey: "spawningEnemies") != nil{
+            self.removeAction(forKey: "spawningEnemies")
+        }
+        
+        var levelDuration = TimeInterval()
+        
+        switch levelNumber {
+        case 1: levelDuration = 1.2
+        case 2: levelDuration = 1
+        case 3: levelDuration = 0.8
+        case 4: levelDuration = 0.5
+        default:
+            levelDuration = 0.5
+            print("Cannot find level info")
+        }
+        
         
         let spawn = SKAction.run(spawnEnemy)
-        let waitToSpawn = SKAction.wait(forDuration: 1)
-        let spawnSequence = SKAction.sequence([spawn, waitToSpawn])
+        let waitToSpawn = SKAction.wait(forDuration: levelDuration)
+        let spawnSequence = SKAction.sequence([waitToSpawn, spawn])
         let spawnForever = SKAction.repeatForever(spawnSequence)
-        self.run(spawnForever)
+        self.run(spawnForever, withKey: "spawningEnemies")
         
         
     }
